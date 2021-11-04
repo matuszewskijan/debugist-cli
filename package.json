@@ -1,0 +1,27 @@
+{
+  "name": "debugist-cli",
+  "version": "1.0.0",
+  "description": "Improve your debugging skills!",
+  "main": "cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matuszewskijan/debugist-cli.git"
+  },
+  "author": "Jan Matuszewski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matuszewskijan/debugist-cli/issues"
+  },
+  "homepage": "https://github.com/matuszewskijan/debugist-cli#readme",
+  "bin": {
+    "choose-task": "bin/choose_task.js",
+    "check-task": "bin/check_task.js",
+    "run-task": "bin/run_task.js"
+  },
+  "dependencies": {
+    "key-file-storage": "^2.2.10"
+  }
+}
