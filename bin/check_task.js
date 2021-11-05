@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 
-const { exec } = require("child_process");
+const { exec, spawn } = require("child_process");
 
 const [,, ...args] = process.argv
 
@@ -16,21 +16,10 @@ if (!taskName) {
 
 console.log(`You're checking task ${taskName}`)
 
-exec('docker-compose run test', {
-  cwd: `./${taskName}`
-}, (error, stdout, stderr) => {
-  if (error) {
-    colorizedOutput()
-    return;
-  }
+const shell = spawn('docker-compose', ['run', 'test'], { stdio: 'inherit', cwd: `./${taskName}` });
 
-  console.log(stdout)
+shell.on('close',(code)=>{console.log('[shell] closed :', code)})
+shell.on('error',(code)=>{console.log('[shell] errored :', code)})
+shell.on('message', (msg) => {
+  console.log('Message from child', msg);
 });
-
-const colorizedOutput = () => {
-  exec('docker-compose logs test', {
-    cwd: `./${taskName}`
-  }, (error, stdout, stderr) => {
-    console.log(stdout)
-  })
-}
